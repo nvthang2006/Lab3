@@ -31,7 +31,31 @@
             </div>
         </nav>
     </header>
-
+    <form action="<?= BASE_URL . '?act=product-update&id=' . $_GET['id'] ?>" method="POST" enctype="multipart/form-data">
+        <div>
+            <label for="name">name</label>
+            <input type="text" name="name" value="<?= $detail['name'] ?>">
+        </div>
+        <div>
+            <label for="image">image</label>
+            <input type="file" name="image" value="<?= $detail['image'] ?>">
+        </div>
+        <div>
+            <label for="price">price</label>
+            <input type="number" name="price" value="<?= $detail['price'] ?>">
+        </div>
+        <div>
+            <label for="category_id">category_id </label>
+            <select name="category_id">
+                <option value="" disabled selected>Chọn</option>
+                <?php foreach ($categories as $category): ?>
+                    <option value="<?= $category['id'] ?>" <?= $category['id'] == $detail['category_id'] ? 'selected' : '' ?>>
+                        <?= $category['name'] ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <button type="submit">Sửa</button>
+    </form>
 </body>
 
 </html>

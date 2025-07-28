@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Du an mau</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
@@ -32,6 +31,14 @@
         </nav>
     </header>
 
+    <form action="<?= BASE_URL . '?act=category-update&id=' . $_GET['id'] ?>" method="POST">
+        <div>
+            <label for="name">name</label>
+            <input type="text" name="name" value="<?= $detail['name'] ?>">
+        </div>
+
+        <button type="submit">Sửa</button>
+    </form>
 </body>
 
 </html>

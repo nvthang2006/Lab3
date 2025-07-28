@@ -21,27 +21,17 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>">Trang chủ</a></li>
-                    </ul>
-                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="<?= BASE_URL . '?act=product-list' ?>">Sản phẩm</a></li>
-                    </ul>
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>">Đăng ký</a></li>
-                    </ul>
-                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL . '?act=category-list' ?>">Danh mục</a></li>
                         <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>">Đăng nhập</a></li>
-                    </ul>
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL  ?>">Giới thiệu</a></li>
-                    </ul>
-                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>">Đăng ký</a></li>
                         <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>">Liên hệ</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-
+    <a href="<?= BASE_URL . '?act=product-create' ?>">Thêm</a>
     <table class="table table-striped">
         <thead>
             <td>id</td>
@@ -51,13 +41,19 @@
             <td>category_id</td>
         </thead>
         <tbody>
-            <?php foreach($products as $product): ?>
+            <?php foreach ($products as $product): ?>
                 <tr>
                     <td><?= $product['id'] ?></td>
                     <td><?= $product['name'] ?></td>
                     <td><?= $product['image'] ?></td>
                     <td><?= $product['price'] ?></td>
                     <td><?= $product['category_name'] ?></td>
+                    <td>
+                        <a href="?act=product-destroy&id=<?= $product['id'] ?>">Xóa</a>
+                    </td>
+                    <td>
+                        <a href="?act=product-edit&id=<?= $product['id'] ?>">Sửa</a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

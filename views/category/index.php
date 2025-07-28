@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Du an mau</title>
+    <title>Du an mau - Danh mục</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Latest compiled JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
@@ -32,6 +31,30 @@
         </nav>
     </header>
 
+    <div class="container mt-4">
+        <a href="<?= BASE_URL . '?act=category-create' ?>">Thêm</a>
+        <table class="table table-striped">
+            <thead>
+                <td>id</td>
+                <td>name</td>
+            </thead>
+            <tbody>
+                <?php foreach ($categories as $category): ?>
+                    <tr>
+                        <td><?= $category['id'] ?></td>
+                        <td><?= $category['name'] ?></td>
+                        <td>
+                            <a href="?act=category-destroy&id=<?= $category['id'] ?>">Xóa</a>
+                        </td>
+                        <td>
+                            <a href="?act=category-edit&id=<?= $category['id'] ?>">Sửa</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
+    </div>
 </body>
 
 </html>
