@@ -1,61 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Du an mau</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#">WEB2041-Dự án mẫu</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>">Trang chủ</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL . '?act=product-list' ?>">Sản phẩm</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL . '?act=category-list' ?>">Danh mục</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>">Đăng nhập</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>">Đăng ký</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>">Liên hệ</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <form action="<?= BASE_URL . '?act=product-update&id=' . $_GET['id'] ?>" method="POST" enctype="multipart/form-data">
-        <div>
-            <label for="name">name</label>
-            <input type="text" name="name" value="<?= $detail['name'] ?>">
-        </div>
-        <div>
-            <label for="image">image</label>
-            <input type="file" name="image" value="<?= $detail['image'] ?>">
-        </div>
-        <div>
-            <label for="price">price</label>
-            <input type="number" name="price" value="<?= $detail['price'] ?>">
-        </div>
-        <div>
-            <label for="category_id">category_id </label>
-            <select name="category_id">
-                <option value="" disabled selected>Chọn</option>
-                <?php foreach ($categories as $category): ?>
-                    <option value="<?= $category['id'] ?>" <?= $category['id'] == $detail['category_id'] ? 'selected' : '' ?>>
-                        <?= $category['name'] ?></option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-        <button type="submit">Sửa</button>
-    </form>
-</body>
-
-</html>
+<form action="<?= BASE_URL . '?act=product-update&id=' . $_GET['id'] ?>" method="POST" enctype="multipart/form-data">
+    <div>
+        <label for="name">Name</label>
+        <input type="text" name="name" value="<?= $detail['name'] ?>" required class="form-control">
+    </div>
+    <div>
+        <label for="image">Image</label>
+        <input type="file" name="image" class="form-control">
+        <?php if (!empty($detail['image'])): ?>
+            <img src="uploads/<?= $detail['image'] ?>" alt="" width="100">
+            <!-- Giữ ảnh cũ nếu không upload ảnh mới -->
+            <input type="hidden" name="old_image" value="<?= $detail['image'] ?>" >
+        <?php endif; ?>
+    </div>
+    <div>
+        <label for="price">Price</label>
+        <input type="number" name="price" value="<?= $detail['price'] ?>" required class="form-control">
+    </div>
+    <div>
+        <label for="quantity">Quantity</label>
+        <input type="number" name="quantity" value="<?= $detail['quantity'] ?>" required class="form-control">
+    </div>
+    <div>
+        <label for="category_id">Category</label>
+        <select name="category_id" required>
+            <option value="" disabled>Chọn danh mục</option>
+            <?php foreach ($categories as $category): ?>
+                <option value="<?= $category['id'] ?>" <?= $category['id'] == $detail['category_id'] ? 'selected' : '' ?>>
+                    <?= $category['name'] ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+    <div>
+        <label for="description">Description</label>
+        <textarea name="description" rows="4" required class="form-control"><?= $detail['description'] ?></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm">Cập nhật</button>
+</form>

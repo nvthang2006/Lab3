@@ -11,26 +11,63 @@
 </head>
 
 <body>
+
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#">WEB2041-Dự án mẫu</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>">Trang chủ</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL . '?act=product-list' ?>">Sản phẩm</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL . '?act=category-list' ?>">Danh mục</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>">Đăng nhập</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>">Đăng ký</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>">Liên hệ</a></li>
+
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between px-5">
+        <div class="container">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="btn btn-primary btn-sm" href="<?= BASE_URL ?>?act=login">Đăng nhập</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <?php if (isset($_SESSION['userLogin'])): ?>
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <?= $_SESSION['userLogin']['name']?>
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="<?= BASE_URL ?>?act=logout">Logout</a></li>
                     </ul>
                 </div>
-            </div>
-        </nav>
-    </header>
+            <?php endif; ?>
+        </div>
+    </nav>
+
+    <div class="container">
+        <?php if (isset($_SESSION['errors']) && count($_SESSION['errors']) > 0): ?>
+            <ul>
+                <?php foreach ($_SESSION['errors'] as $errors): ?>
+                    <li>
+                        <span class="text-danger"><?= $errors ?></span>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+            <?php unset($_SESSION['errors']); ?>
+        <?php endif; ?>
+        <?php if (isset($_SESSION['success']) && count($_SESSION['success']) > 0): ?>
+            <ul>
+                <?php foreach ($_SESSION['success'] as $success): ?>
+                    <li>
+                        <span class="text-success"><?= $success ?></span>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+            <?php unset($_SESSION['success']); ?>
+        <?php endif; ?>
+        <h1 class="mt-3 mb-3"><?= $title ?? 'Home' ?></h1>
+        <div class="row">
+            <?php
+            if (isset($view)) {
+                require_once './views/' . $view . '.php';
+            }
+            ?>
+        </div>
+    </div>
 
 </body>
 

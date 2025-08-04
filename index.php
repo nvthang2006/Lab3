@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Require toàn bộ các file khai báo môi trường, thực thi,...(không require view)
 
 // Require file Common
@@ -9,10 +10,13 @@ require_once './commons/function.php'; // Hàm hỗ trợ
 require_once './controllers/ProductController.php';
 require_once './controllers/HomeController.php';
 require_once './controllers/CategoryController.php';
+require_once './controllers/DashboardController.php';
+require_once './controllers/UserController.php';
 
 // Require toàn bộ file Models
 require_once './models/ProductModel.php';
 require_once './models/CategoryModel.php';
+require_once './models/User.php';
 
 // Route
 $act = $_GET['act'] ?? '/';
@@ -24,8 +28,12 @@ $act = $_GET['act'] ?? '/';
 match ($act) {
     // Trang chủ
     '/' => (new ProductController())->Home(),
-    // '/'=>(new HomeController())->Home(),
+    '/'=>(new HomeController())->Home(),
+    'login'=>(new HomeController())->login(),
+    'register'=>(new HomeController())->register(),
+    'logout'=>(new HomeController())->logout(),
 
+    //product
     'product-list' => (new ProductController())->index(),
     'product-create' => (new ProductController())->create(),
     'product-store' => (new ProductController())->store(),
@@ -34,11 +42,22 @@ match ($act) {
     'product-update' => (new ProductController())->update(),
 
 
-
+    //category
     'category-list'    => (new CategoryController())->index(),
     'category-create'  => (new CategoryController())->create(),
     'category-store'   => (new CategoryController())->store(),
     'category-edit'    => (new CategoryController())->edit(),
     'category-update'  => (new CategoryController())->update(),
     'category-destroy' => (new CategoryController())->delete(),
+
+    //user
+    'user-list' => (new UserController())->index(),
+    'user-create' => (new UserController())->create(),
+    'user-store' => (new UserController())->store(),
+    'user-edit' => (new UserController())->edit(),
+    'user-update' => (new UserController())->update(),
+    'user-destroy' => (new UserController())->destroy(),
+
+    //admin
+    'admin-dashboard' => (new DashboardController())->index(),
 };

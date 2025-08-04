@@ -20,7 +20,8 @@ function connectDB() {
     } catch (PDOException $e) {
         echo ("Connection failed: " . $e->getMessage());
     }
-}
+    
+} 
 
 function uploadFile($file, $folderSave){
     $file_upload = $file;

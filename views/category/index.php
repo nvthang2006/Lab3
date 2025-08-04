@@ -1,60 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <?php include "views/admin/sidebar.php" ?>
+        </div>
+        <div class="col-9">
+            <a href="<?= BASE_URL . '?act=category-create' ?>" class="btn btn-primary btn-sm">Thêm</a>
+            <table class="table table-striped">
+                <thead>
+                    <td>id</td>
+                    <td>name</td>
+                </thead>
+                <tbody>
+                    <?php foreach ($categories as $category): ?>
+                        <tr>
+                            <td><?= $category['id'] ?></td>
+                            <td><?= $category['name'] ?></td>
+                            <td>
+                                <a href="?act=category-edit&id=<?= $category['id'] ?>" class="btn btn-primary btn-sm">Sửa</a>
+                            </td>
+                            <td>
+                                <a href="?act=category-destroy&id=<?= $category['id'] ?>" onclick="return confirm('Bạn có muốn xóa không?')" class="btn btn-danger btn-sm">Xóa</a>
+                            </td>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Du an mau - Danh mục</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#">WEB2041-Dự án mẫu</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>">Trang chủ</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL . '?act=product-list' ?>">Sản phẩm</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL . '?act=category-list' ?>">Danh mục</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>">Đăng nhập</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>">Đăng ký</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>">Liên hệ</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <div class="container mt-4">
-        <a href="<?= BASE_URL . '?act=category-create' ?>">Thêm</a>
-        <table class="table table-striped">
-            <thead>
-                <td>id</td>
-                <td>name</td>
-            </thead>
-            <tbody>
-                <?php foreach ($categories as $category): ?>
-                    <tr>
-                        <td><?= $category['id'] ?></td>
-                        <td><?= $category['name'] ?></td>
-                        <td>
-                            <a href="?act=category-destroy&id=<?= $category['id'] ?>">Xóa</a>
-                        </td>
-                        <td>
-                            <a href="?act=category-edit&id=<?= $category['id'] ?>">Sửa</a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
 
     </div>
-</body>
-
-</html>
+</div>

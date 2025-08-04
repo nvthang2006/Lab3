@@ -1,63 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <?php include "views/admin/sidebar.php" ?>
+        </div>
+        <div class="col-9">
+            <a href="<?= BASE_URL . '?act=product-create' ?>" class="btn btn-primary btn-sm">Thêm</a>
+            <table class="table table-striped">
+                <thead>
+                    <td>id</td>
+                    <td>name</td>
+                    <td>image</td>
+                    <td>price</td>
+                    <td>quantity</td>
+                    <td>description</td>
+                    <td>category_id</td>
+                    <td colspan="2">Hành động</td>
+                </thead>
+                <tbody>
+                    <?php foreach ($products as $product): ?>
+                        <tr>
+                            <td><?= $product['id'] ?></td>
+                            <td><?= $product['name'] ?></td>
+                            <td><img src="<?= $product['image'] ?>" width="80"></td>
+                            <td><?= $product['price'] ?></td>
+                            <td><?= $product['quantity'] ?></td>
+                            <td><?= $product['description'] ?></td>
+                            <td><?= $product['category_name'] ?></td>
+                            <td>
+                                <a href="?act=product-edit&id=<?= $product['id'] ?>" class="btn btn-primary btn-sm">Sửa</a>
+                            </td>
+                            <td>
+                                <a href="?act=product-destroy&id=<?= $product['id'] ?>" onclick="return confirm('Bạn có muốn xóa không?')" class="btn btn-danger btn-sm">Xóa</a>
+                            </td>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Du an mau</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#">WEB2041-Dự án mẫu</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>">Trang chủ</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL . '?act=product-list' ?>">Sản phẩm</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL . '?act=category-list' ?>">Danh mục</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>">Đăng nhập</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>">Đăng ký</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>">Liên hệ</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <a href="<?= BASE_URL . '?act=product-create' ?>">Thêm</a>
-    <table class="table table-striped">
-        <thead>
-            <td>id</td>
-            <td>name</td>
-            <td>image</td>
-            <td>price</td>
-            <td>category_id</td>
-        </thead>
-        <tbody>
-            <?php foreach ($products as $product): ?>
-                <tr>
-                    <td><?= $product['id'] ?></td>
-                    <td><?= $product['name'] ?></td>
-                    <td><?= $product['image'] ?></td>
-                    <td><?= $product['price'] ?></td>
-                    <td><?= $product['category_name'] ?></td>
-                    <td>
-                        <a href="?act=product-destroy&id=<?= $product['id'] ?>">Xóa</a>
-                    </td>
-                    <td>
-                        <a href="?act=product-edit&id=<?= $product['id'] ?>">Sửa</a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-</body>
-
-</html>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

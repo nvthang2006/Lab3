@@ -13,43 +13,67 @@ class ProductController
 
     public function Home()
     {
-        $title = "Đây là trang chủ nhé hahaa";
-        $thoiTiet = "Hôm naytrời có vẻ là mưa";
+        $title = "Trang chủ";
+        $view = "trangchu"; // nếu bạn có file ./views/home.php
         require_once './views/trangchu.php';
     }
 
-    public function index(){
+    public function index()
+    {
+
+        $title = "Trang sản phẩm";
+        $view = "product/index";
         $products = $this->modelProduct->getAllProduct();
-        require_once './views/product/index.php';
+        require_once './views/trangchu.php';
     }
 
-    public function create(){
+    public function create()
+    {
+
+        $title = "Thêm sản phẩm";
+        $view = "product/create";
         $categories = $this->modelCategory->getAllCategory();
-        require_once './views/product/create.php';
+        require_once './views/trangchu.php';
     }
-    public function store(){
-        $result = $this->modelProduct->insert();
+
+    public function store()
+    {
+                $file = $_FILES['image'];
+        $path = "";
+        if (!empty($file)) {
+            $newName = time() . $file['name'];
+            $path = 'uploads/' . $newName;
+            move_uploaded_file($file['tmp_name'], $path);
+        }
+        $result = $this->modelProduct->insert($path);
         if ($result) {
             header('Location: ' . BASE_URL . '?act=product-list');
             exit;
         }
     }
-    public function delete(){
 
+    public function delete()
+    {
         $deleted = $this->modelProduct->delete();
         if ($deleted) {
             header('Location: ' . BASE_URL . '?act=product-list');
             exit;
         }
     }
-    public function edit(){
+
+    public function edit()
+    {
+        $title = "Chỉnh sửa sản phẩm";
+        $view = "product/edit";
         $categories = $this->modelCategory->getAllCategory();
         $detail = $this->modelProduct->getOne();
-        require_once './views/product/edit.php';
+        require_once './views/trangchu.php';
     }
-    public function update(){
-        $deleted = $this->modelProduct->update();
-        if ($deleted) {
+
+    public function update()
+    {
+        $updated = $this->modelProduct->update();
+        if ($updated) {
             header('Location: ' . BASE_URL . '?act=product-list');
             exit;
         }

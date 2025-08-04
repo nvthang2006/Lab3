@@ -9,20 +9,21 @@ class CategoryController
         $this->modelCategory = new CategoryModel();
     }
 
-    // Danh sách
     public function index()
     {
+        $title = "Danh sách danh mục";
+        $view = "category/index";
         $categories = $this->modelCategory->getAllCategory();
-        require_once './views/category/index.php';
+        require_once './views/trangchu.php';
     }
 
-    // Giao diện thêm
     public function create()
     {
-        require_once './views/category/create.php';
+        $title = "Thêm danh mục";
+        $view = "category/create";
+        require_once './views/trangchu.php';
     }
 
-    // Lưu khi thêm
     public function store()
     {
         $result = $this->modelCategory->insert();
@@ -32,14 +33,14 @@ class CategoryController
         }
     }
 
-    // Giao diện sửa
     public function edit()
     {
+        $title = "Chỉnh sửa danh mục";
+        $view = "category/edit";
         $detail = $this->modelCategory->getOne();
-        require_once './views/category/edit.php';
+        require_once './views/trangchu.php';
     }
 
-    // Cập nhật sau khi sửa
     public function update()
     {
         $updated = $this->modelCategory->update();
@@ -49,7 +50,6 @@ class CategoryController
         }
     }
 
-    // Xoá
     public function delete()
     {
         $deleted = $this->modelCategory->delete();
